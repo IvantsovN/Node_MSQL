@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- Кодировка веб-страницы -->
+    <meta charset="utf-8">
+    <!-- Настройка viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Подключаем Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+	<style>
+		.row {
+			margin-top: 20px;
+		}
+		p {
+			text-align: center;
+			font-size: 25px;
+			font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+			font-weight: 200;
+		}
+		.b{
+			
+			width: 100px;
+			height: 100px;
+
+		}
+		.goods {
+			width: 90%;
+			height: 90%;
+			border: 1px solid #ccc;
+		}
+	</style>
+</head>
+<body>
+    
+    <!-- Контент страницы -->
+    <div class="container">
+  		<div class="row">
+  			<div class="col-xs-6 col-md-5 b">
+  				<p>Чек</p>
+  				
+  			</div>
+  			<div class="col-xs-12 col-md-7 " >
+				<p>Меню</p>
+				<div class="row">
+  					<div class="col-md-3 b" onclick="check()">
+  						<div class="goods ">
+  							
+  						</div>
+  					</div>
+  					<div class="col-md-3 b" onclick="check()">
+  						<div class="goods ">
+  							
+  						</div>
+  					</div>
+  					<div class="col-md-3 b" onclick="check()">
+  						<div class="goods ">
+  							
+  						</div>
+  					</div>
+  					<div class="col-md-3 b">
+  						<div class="goods " onclick="check()">
+  							
+  						</div>
+  					</div>
+  				</div>
+
+  			</div>		
+		</div>
+	</div>
+
+
+  <script type="text/javascript">
+    
+    function check(){
+      alert('OK');
+    }
+  </script>
+
+    <!-- Подключаем jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <!-- Подключаем плагин Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    
+    <!-- Подключаем Bootstrap JS -->    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    
+</body>
+</html>

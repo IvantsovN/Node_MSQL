@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- Кодировка веб-страницы -->
+    <meta charset="utf-8">
+    <!-- Настройка viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Подключаем Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+	<style>
+		.row {
+			margin-top: 20px;
+		}
+		p {
+			text-align: center;
+			font-size: 25px;
+			font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+			font-weight: 200;
+		}
+    h4 {
+      padding-top: 15px;
+    }
+		.b{
+
+
+			height: 120px;
+
+		}
+		.goods {
+			width: 90%;
+			height: 90%;
+			border: 1px solid #ccc;
+    text-align: center;
+    padding-top: 15px;
+
+		}
+    .check {
+      border: 1px solid #ccc;
+    }
+  .count {
+    width: 50px;
+    text-align: center;
+    padding-left: 15px;
+  }
+  .minus, .plus {
+    cursor: pointer;
+  }
+  .total {
+    float: right;
+    font-size: 25px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    padding: 6px 10px 6px 10px;
+  }
+	</style>
+
+</head>
+<body>
+
+    <!-- Контент страницы -->
+    <div class="container-fluid">
+  		<div class="row">
+  			<div class="col-lg-6 col-md-5 b">
+  				<p>Чек</p>
+          <table class="table ">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Название товара</th>
+                <th scope="col">Цена</th>
+                <th scope="col">Количество</th>
+                <th scope="col"></th>
+
+              </tr>
+            </thead>
+            <tbody id="goods_tab">
+
+            </tbody>
+          </table>
+          <button type="button" class="btn btn-primary btn-lg">Перейти к оплате</button>
+          <div class="total">Сумма заказа : <span id="total">0</span></div>
+            </div>
+
+
+  			<div class="col-lg-6 col-md-7 " >
+				<p>Меню</p>
+				<div class="row">
+            <% goods.forEach(function(item){ %>
+              <div class="col-md-3 b" >
+                  <div class="goods " id='<%=item._id%>'  onclick='add_check(this)'>
+                    <span class="name_goods"><%= item.name %></span>
+                   <h4 class="price_goods"><%= item.price %></h4>
+                  </div>
+             </div>
+            <%ss = item.name; });
+            %>
+
+  				</div>
+
+  			</div>
+
+		</div>
+
+	</div>
+
+    <!-- Подключаем jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Подключаем плагин Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+    <!-- Подключаем Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+    var all_goods = {};
+    var all_id =[],flag;
+
+      function add_check(el) {
+        var div = document.getElementById(el.id);
+        var name_goods = $(div).children(".name_goods").html();
+        var price_goods = $(div).children(".price_goods").html();
+        flag = false;
+        all_id.forEach(function(item) {
+          if(item == el.id){
+            flag = true;
+          }
+        });
+        if(!flag){
+          all_id[all_id.length] = el.id;
+          all_goods[el.id] =  [name_goods, price_goods, 1];
+        }
+        else {
+          all_goods[el.id][2] += 1;
+        }
+        goods_tab_view()
+        //str = JSON.stringify(all_goods);
+        //alert(str);
+      }
+
+      function del_goods(el) {
+        var index = all_id.indexOf(el.id);
+        all_id.splice(index, 1)
+        goods_tab_view()
+      }
+
+  function goods_tab_view(){
+    var total = 0;
+    document.getElementById('goods_tab').innerHTML = '';
+    var j = 1;
+    all_id.forEach(function(item) {
+      html = "<tr><th scope='row'>"+j+"</th>";j++;
+      for(var i = 0; i < all_goods[item].length; i++) {
+        html += "<td >" +all_goods[item][i]+"</td>";
+      }
+      total += parseInt(all_goods[item][1])*parseInt(all_goods[item][2]);
+      html += "<th id="+item+" onClick='del_goods(this)'>X</th></tr>";
+      document.getElementById('goods_tab').innerHTML += html;
+    });
+    document.getElementById('total').innerHTML = total;
+}
+
+    </script>
+</body>
+</html>
